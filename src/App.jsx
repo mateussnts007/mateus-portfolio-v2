@@ -66,12 +66,71 @@ const experiences = [
 ];
 
 const highlights = [
-  { number: "01", title: "Análise de dados", detail: "Indicadores e resultados", side: "left" },
-  { number: "02", title: "Visão comercial", detail: "Estratégia e oportunidades", side: "left" },
-  { number: "03", title: "Evolução constante", detail: "Aprendizado e tecnologia", side: "left" },
-  { number: "04", title: "Backoffice", detail: "Experiência operacional", side: "right" },
-  { number: "05", title: "Tecnologia", detail: "ADS e desenvolvimento", side: "right" },
-  { number: "06", title: "Resultados", detail: "Processos e performance", side: "right" },
+  {
+    number: "01",
+    title: "Análise de dados",
+    detail: "Indicadores e resultados",
+    side: "left",
+    description:
+      "Mateus valoriza o uso de dados para compreender cenários e acompanhar resultados. Em sua rotina profissional, tem contato com relatórios, indicadores comerciais e ferramentas como Excel e Power BI, utilizando informações para apoiar análises e decisões.",
+  },
+  {
+    number: "02",
+    title: "Visão comercial",
+    detail: "Estratégia e oportunidades",
+    side: "left",
+    description:
+      "A experiência de Mateus na área comercial permitiu desenvolver uma visão ampla dos processos de vendas, das necessidades das equipes e das oportunidades de negócio. Ele busca conectar organização, informação e estratégia para contribuir com os resultados.",
+  },
+  {
+    number: "03",
+    title: "Evolução constante",
+    detail: "Aprendizado e tecnologia",
+    side: "left",
+    description:
+      "Mateus acredita no aprendizado contínuo como parte da construção de sua carreira. Mantém interesse em novas ferramentas, estuda tecnologia e procura transformar cada experiência profissional e acadêmica em uma oportunidade de evolução.",
+  },
+  {
+    number: "04",
+    title: "Backoffice",
+    detail: "Experiência operacional",
+    side: "right",
+    description:
+      "Mateus atua no suporte operacional e comercial, acompanhando demandas, organizando informações e apoiando equipes ao longo dos processos de vendas. Sua vivência envolve sistemas corporativos, relatórios, tratativas operacionais e contato com diferentes áreas.",
+  },
+  {
+    number: "05",
+    title: "Tecnologia",
+    detail: "ADS e desenvolvimento",
+    side: "right",
+    description:
+      "Estudante de Análise e Desenvolvimento de Sistemas, Mateus tem grande interesse pelo universo da tecnologia. Dedica-se a aprender lógica de programação, HTML, CSS e JavaScript, explorando o desenvolvimento web e construindo seu caminho com o objetivo de atuar como desenvolvedor Front-end.",
+  },
+  {
+    number: "06",
+    title: "Resultados",
+    detail: "Processos e performance",
+    side: "right",
+    description:
+      "Mateus acompanha indicadores, relatórios e informações da operação para ajudar a identificar pendências, observar a performance e dar visibilidade aos resultados. Seu foco está em contribuir com processos mais organizados e decisões apoiadas por dados.",
+  },
+];
+
+const certificates = [
+  { title: "Assistente Administrativo", file: "/cursos/ASSITENTE%20ADMINSTRATIVO.pdf" },
+  { title: "Comunicação Empresarial", file: "/cursos/COMUNICAÇÃO-EMPRESARIAL.pdf" },
+  { title: "Contabilidade Básica", file: "/cursos/CONTABILIDADE-basic.pdf" },
+  { title: "Contabilidade Comercial", file: "/cursos/CONTABILIDADE-COMERCIAL.pdf" },
+  { title: "Contabilidade Empresarial", file: "/cursos/CONTABILIDADE-EMPRESARIAL.pdf" },
+  { title: "Desenvolvimento Profissional", file: "/cursos/DESENVOLVIMENTO-PROFISSIONAL.pdf" },
+  { title: "Educação Financeira", file: "/cursos/EDUCAÇÃO-FINANCEIRA.pdf" },
+  { title: "Estratégia de Negócios", file: "/cursos/ESTRATEGIA-NEGOCIOS.pdf" },
+  { title: "Introdução ao Excel", file: "/cursos/intro-excel.pdf" },
+  { title: "Introdução ao Power BI", file: "/cursos/intro-POWERBI.pdf" },
+  { title: "PowerPoint Avançado", file: "/cursos/power-avanced.pdf" },
+  { title: "PowerPoint Básico", file: "/cursos/power-basic.pdf" },
+  { title: "Word Avançado", file: "/cursos/word-avanced.pdf" },
+  { title: "Word Básico", file: "/cursos/word-basic.pdf" },
 ];
 
 const achievements = [
@@ -202,6 +261,7 @@ function Navbar() {
 }
 
 function HeroSection() {
+  const [selectedHighlight, setSelectedHighlight] = useState(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const cursorX = useMotionValue(0);
@@ -290,9 +350,12 @@ function HeroSection() {
         <div className="hero-visual">
           <div className="hero-side-tags left-tags">
             {highlights.filter((item) => item.side === "left").map((item, index) => (
-              <motion.div
+              <motion.button
+                type="button"
                 className="hero-tag"
                 key={item.number}
+                onClick={() => setSelectedHighlight(item)}
+                aria-label={`Saiba mais sobre ${item.title}`}
                 initial={{ opacity: 0, x: -22 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -311,7 +374,7 @@ function HeroSection() {
                   <strong>{item.title}</strong>
                   <small>{item.detail}</small>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
 
@@ -353,9 +416,12 @@ function HeroSection() {
 
           <div className="hero-side-tags right-tags">
             {highlights.filter((item) => item.side === "right").map((item, index) => (
-              <motion.div
+              <motion.button
+                type="button"
                 className="hero-tag"
                 key={item.number}
+                onClick={() => setSelectedHighlight(item)}
+                aria-label={`Saiba mais sobre ${item.title}`}
                 initial={{ opacity: 0, x: 22 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -374,7 +440,7 @@ function HeroSection() {
                   <strong>{item.title}</strong>
                   <small>{item.detail}</small>
                 </div>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -384,6 +450,44 @@ function HeroSection() {
         <span />
         ROLE PARA EXPLORAR
       </div>
+
+      <AnimatePresence>
+        {selectedHighlight && (
+          <motion.div
+            className="highlight-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedHighlight(null)}
+          >
+            <motion.section
+              className="highlight-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="highlight-modal-title"
+              initial={{ opacity: 0, y: 22, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                className="highlight-modal-close"
+                type="button"
+                onClick={() => setSelectedHighlight(null)}
+                aria-label="Fechar explicação"
+              >
+                ×
+              </button>
+              <span className="highlight-modal-index">{selectedHighlight.number} / PERFIL PROFISSIONAL</span>
+              <h2 id="highlight-modal-title">{selectedHighlight.title}</h2>
+              <span className="highlight-modal-detail">{selectedHighlight.detail}</span>
+              <p>{selectedHighlight.description}</p>
+              <div className="highlight-modal-footer">MATEUS SANTOS <span>•</span> PORTFÓLIO</div>
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -551,6 +655,17 @@ function ExperienceSection() {
 }
 
 function EducationSection() {
+  const [certificateIndex, setCertificateIndex] = useState(null);
+  const selectedCertificate = certificateIndex === null ? null : certificates[certificateIndex];
+
+  function showPreviousCertificate() {
+    setCertificateIndex((current) => (current - 1 + certificates.length) % certificates.length);
+  }
+
+  function showNextCertificate() {
+    setCertificateIndex((current) => (current + 1) % certificates.length);
+  }
+
   return (
     <section className="section education-section" id="formacao">
       <div className="container">
@@ -572,25 +687,86 @@ function EducationSection() {
             <span className="education-period">2026 — ATUAL</span>
           </Reveal>
 
-          <Reveal className="education-card" delay={0.12}>
-            <span className="education-number">02</span>
-            <div className="education-icon">▤</div>
-            <span className="education-level">ENSINO MÉDIO</span>
-            <h3>Ensino Médio Completo</h3>
-            <p>E.E. Maria Juvenal Homem de Mello</p>
-            <span className="education-period">2021 — 2023</span>
-          </Reveal>
-
-          <Reveal className="education-card certifications-card" delay={0.22}>
-            <span className="education-number">03</span>
-            <div className="education-icon">✳</div>
-            <span className="education-level">DESENVOLVIMENTO CONTÍNUO</span>
-            <h3>Certificações & Cursos</h3>
-            <p>Aprendizado complementar em diferentes áreas.</p>
-            <span className="education-period">15 CERTIFICAÇÕES</span>
+          <Reveal className="education-card certifications-card" delay={0.12}>
+            <button
+              className="certifications-card-action"
+              type="button"
+              onClick={() => setCertificateIndex(0)}
+              aria-label="Abrir os 14 certificados e cursos"
+            >
+              <span className="education-number">02</span>
+              <div className="education-icon">✳</div>
+              <span className="education-level">DESENVOLVIMENTO CONTÍNUO</span>
+              <h3>Certificações & Cursos</h3>
+              <p>Aprendizado complementar em diferentes áreas.</p>
+              <span className="education-period">14 CERTIFICAÇÕES</span>
+              <span className="certifications-open-hint">CLIQUE PARA EXPLORAR <span>↗</span></span>
+            </button>
           </Reveal>
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedCertificate && (
+          <motion.div
+            className="certificates-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setCertificateIndex(null)}
+          >
+            <motion.section
+              className="certificates-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="certificate-modal-title"
+              initial={{ opacity: 0, y: 22, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.25 }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="certificates-modal-header">
+                <div>
+                  <span className="certificates-modal-eyebrow">ACERVO DE FORMAÇÃO</span>
+                  <h2 id="certificate-modal-title">{selectedCertificate.title}</h2>
+                  <p>Certificado {certificateIndex + 1} de {certificates.length}</p>
+                </div>
+                <button
+                  className="certificates-modal-close"
+                  type="button"
+                  onClick={() => setCertificateIndex(null)}
+                  aria-label="Fechar certificados"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="certificate-document-wrap">
+                <iframe
+                  key={selectedCertificate.file}
+                  className="certificate-document"
+                  src={`${selectedCertificate.file}#toolbar=1&navpanes=0&view=FitH`}
+                  title={`Certificado: ${selectedCertificate.title}`}
+                />
+              </div>
+
+              <div className="certificates-modal-controls">
+                <button type="button" className="certificate-nav-button" onClick={showPreviousCertificate}>
+                  <span>←</span> ANTERIOR
+                </button>
+                <span className="certificate-counter">{String(certificateIndex + 1).padStart(2, "0")} <i>/</i> {String(certificates.length).padStart(2, "0")}</span>
+                <button type="button" className="certificate-nav-button next" onClick={showNextCertificate}>
+                  PRÓXIMO <span>→</span>
+                </button>
+              </div>
+              <a className="certificate-open-link" href={selectedCertificate.file} target="_blank" rel="noreferrer">
+                Se o documento não aparecer, abra o PDF em uma nova aba ↗
+              </a>
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -696,20 +872,53 @@ function ContactSection() {
 
           <div className="contact-links">
             <a
-              href="https://linkedin.com/in/mateus-dos-santos-b16b5b253/"
+              className="contact-social-button linkedin-button"
+              href="https://www.linkedin.com/in/mateus-dos-santos-b16b5b253/"
               target="_blank"
               rel="noreferrer"
+              aria-label="Acessar perfil de Mateus no LinkedIn"
             >
-              LINKEDIN ↗
+              <span className="contact-social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2ZM8.34 18H5.67V9.42h2.67ZM7 8.25a1.55 1.55 0 1 1 0-3.1 1.55 1.55 0 0 1 0 3.1ZM18.34 18h-2.67v-4.17c0-1-.02-2.28-1.39-2.28-1.39 0-1.6 1.08-1.6 2.2V18h-2.67V9.42h2.56v1.17h.04a2.81 2.81 0 0 1 2.53-1.39c2.7 0 3.2 1.78 3.2 4.09Z" />
+                </svg>
+              </span>
+
+              <span className="contact-social-copy">
+                <strong>LinkedIn</strong>
+                <small>Conectar profissionalmente</small>
+              </span>
+
+              <span className="contact-social-arrow" aria-hidden="true">↗</span>
             </a>
+
             <a
+              className="contact-social-button github-button"
               href="https://github.com/mateussnts007"
               target="_blank"
               rel="noreferrer"
+              aria-label="Acessar GitHub de Mateus"
             >
-              GITHUB ↗
+              <span className="contact-social-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img">
+                  <path d="M12 .9a11.1 11.1 0 0 0-3.51 21.63c.55.1.76-.24.76-.53v-2.07c-3.1.67-3.75-1.32-3.75-1.32-.5-1.28-1.23-1.62-1.23-1.62-1.01-.69.08-.68.08-.68 1.12.08 1.71 1.15 1.71 1.15.99 1.7 2.6 1.21 3.23.92.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.05 1.15a10.6 10.6 0 0 1 5.55 0c2.12-1.45 3.05-1.15 3.05-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.62 5.23-5.11 5.51.4.35.75 1.03.75 2.08V22c0 .29.2.64.76.53A11.1 11.1 0 0 0 12 .9Z" />
+                </svg>
+              </span>
+
+              <span className="contact-social-copy">
+                <strong>GitHub</strong>
+                <small>Explorar projetos e códigos</small>
+              </span>
+
+              <span className="contact-social-arrow" aria-hidden="true">↗</span>
             </a>
-            <a href="mailto:contato.mtssnts@gmail.com">E-MAIL ↗</a>
+
+            <a
+              className="contact-email-link"
+              href="mailto:contato.mtssnts@gmail.com"
+            >
+              
+            </a>
           </div>
         </Reveal>
       </div>
